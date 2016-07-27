@@ -857,6 +857,7 @@
                         //Find nodes with demand and flag them for fixing
                         var fixlist = [];
                         var yy = 0;
+                        var addedFirstElementPipe = "";
                         while (yy < ARRAY_OF_JUNCTIONS.length) {
                             if (ARRAY_OF_JUNCTIONS[yy].Demand !== 0) { //then there is a demand at this node!
                                 if (sList.indexOf(ARRAY_OF_JUNCTIONS[yy].ID) >= 0 || bpList.indexOf(ARRAY_OF_JUNCTIONS[yy].ID) >= 0) {
@@ -890,14 +891,15 @@
                                 extraTankElev = sDepth;
                             }
                     
-                    addedTank = new Tank("TB"+String(k), ARRAY_OF_JUNCTIONS[fixlist[fix]].Elev + extraTankElev, 0, 0, tankHeight, newSizes.newTankDia, 0, true);
+                    addedTank = new Tank(" TB"+String(k) + "        \t", ARRAY_OF_JUNCTIONS[fixlist[fix]].Elev + extraTankElev, 0, 0, tankHeight, newSizes.newTankDia, 0, true);
                     
                     //addedTank = new Tank("cheese", 5, 0,0,1,10,0,true);
                     ARRAY_OF_TANKS.push(addedTank);
                     // join with adequate pipes
                     ARRAY_OF_JUNCTIONS[fixlist[fix]].ID = ARRAY_OF_JUNCTIONS[fixlist[fix]].ID.substring(ARRAY_OF_JUNCTIONS[fixlist[fix]].ID.indexOf("\n") + "\n".length, ARRAY_OF_JUNCTIONS[fixlist[fix]].ID.length);
                     
-                    addedPipe = new Pipe ("\n", "B" + String(k) +"    \t" + ARRAY_OF_JUNCTIONS[fixlist[fix]].ID, ARRAY_OF_TANKS[ARRAY_OF_TANKS.length - 1].ID, pipeLengthHH, newSizes.newPipeDia, pipeRoughHH, newSizes.newLossCoef,"Open", true);
+                    addedFirstElementPipe ="";         
+                    addedPipe = new Pipe ("\n", "B" + String(k) +"    \t" + "        \t" + ARRAY_OF_JUNCTIONS[fixlist[fix]].ID, ARRAY_OF_TANKS[ARRAY_OF_TANKS.length - 1].ID, pipeLengthHH, newSizes.newPipeDia, pipeRoughHH, newSizes.newLossCoef,"Open", true);
        
                     ARRAY_OF_PIPES.push(addedPipe);
                     
